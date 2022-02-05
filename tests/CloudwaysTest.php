@@ -28,6 +28,6 @@ class CloudwaysTest extends TestCase
 
         $this->expectException(RequestException::class);
 
-        $cloudways->startGitPull(1, 1, '', '');
+        $cloudways->startGitPull();
     }
 }

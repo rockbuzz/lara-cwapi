@@ -2,23 +2,11 @@
 
 namespace Rockbuzz\LaraCwApi;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class Cloudways
 {
-    /** @var string */
-    protected $email;
-
-    /** @var string */
-    protected $apiKey;
-
-    public function __construct(string $email, string $apiKey)
-    {
-        $this->email = $email;
-        $this->apiKey = $apiKey;
-    }
-
     /**
      * Generate an OAuth access token
      * To access any API call you first need to authorize on our Cloudways API.
@@ -45,18 +33,10 @@ class Cloudways
     /**
      * Pull repo changes and deploy them
      *
-     * @param integer $serverId
-     * @param integer $appId
-     * @param string $branchName
-     * @param string $deployPath
      * @return integer operation_id
     */
-    public function startGitPull(
-        int $serverId,
-        int $appId,
-        string $branchName,
-        string $deployPath
-    ): int {
+    public function startGitPull(): int 
+    {
         $token = $this->getOAuthAccessToken();
 
         return Http::cloudways()
@@ -64,10 +44,11 @@ class Cloudways
             ->post(
                 '/git/pull',
                 [
-                    'server_id' => $serverId,
-                    'app_id' => $appId,
-                    'branch_name' => $branchName,
-                    'deploy_path' => $deployPath
+                    'server_id' => config('cloudways.server_id'),
+                    'app_id' => config('cloudways.app_id'),
+                    'git_url' => config('cloudways.git_url'),
+                    'branch_name' => config('cloudways.branch_name'),
+                    'deploy_path' => config('cloudways.deploy_path')
                 ]
             )
             ->throw()
@@ -80,8 +61,8 @@ class Cloudways
     private function attempt(): array
     {
         $data = [
-            'email' => $this->email,
-            'api_key' => $this->apiKey
+            'email' => config('cloudways.email'),
+            'api_key' => config('cloudways.api_key')
         ];
 
         return Http::cloudways()
