@@ -60,6 +60,6 @@ class Cloudways
 
         $token = $this->auth->getOAuthAccessToken();
 
-        return Cache::remember($key, $token->expires, $token->value);
+        return Cache::remember($key, $token->expires, fn () => $token->value);
     }
 }
