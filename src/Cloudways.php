@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rockbuzz\LaraCwApi;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 
 class Cloudways
 {
@@ -52,16 +51,5 @@ class Cloudways
             )
             ->throw()
             ->json()['operation_id'];
-    }
-
-    protected function getAccessToken(): string
-    {
-        $key = config('cloudways.cache_token_key');
-
-        if (Cache::has($key)) return Cache::get($key);
-
-        $token = $this->auth->getOAuthAccessToken();
-
-        return Cache::remember($key, $token->expires, fn () => $token->value);
     }
 }
