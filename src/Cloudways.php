@@ -37,7 +37,7 @@ class Cloudways
     ): int 
     {
         return Http::cloudways()
-            ->withToken($this->getAccessToken())
+            ->withToken($this->auth->getOAuthAccessToken())
             ->post(
                 '/git/pull',
                 [
