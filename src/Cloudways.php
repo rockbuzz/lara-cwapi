@@ -1,73 +1,66 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rockbuzz\LaraCwApi;
 
+use Rockbuzz\LaraCloudways\Api\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
 class Cloudways
 {
-    /**
-     * Generate an OAuth access token
-     * To access any API call you first need to authorize on our Cloudways API.
-     * For the purpose we use OAuth, an open standard for authorization.
-     * Here are the steps involved: 1.
-     * Get your API Key from here: https://platform.cloudways.com/api 2.
-     * Get OAuth Access token using this call. 3.
-     * Send the access token with each request in bearer authorization header.
-     * Each Access Token will expire after 3600 seconds of inactivity.
-     *
-     * @param array {email: string, api_key: string} $data
-     * @return array {access_token: string, token_type: string, expires_in: int}
-     * @throws RequestException
-    */
-    public function getOAuthAccessToken(): string
+    /** @var Auth */
+    protected $auth;
+
+    public function __construct($auth)
     {
-        return Cache::remember(
-            'cloudways_access_token',
-            3600,
-            fn () => $this->attempt()['access_token']
-        );
+        $this->auth = $auth;
     }
 
     /**
      * Pull repo changes and deploy them
      *
-     * @return integer operation_id
-    */
-    public function startGitPull(): int 
+     * @param integer $server
+     * @param integer $app
+     * @param string $git
+     * @param string $branch
+     * @param string $path
+     * @return integer Opreation ID
+     * @throws RequestException
+     */
+    public function startGitPull(
+        int $server, 
+        int $app, 
+        string $git, 
+        string $branch, 
+        string $path = ''
+    ): int 
     {
-        $token = $this->getOAuthAccessToken();
-
         return Http::cloudways()
-            ->withToken($token)
+            ->withToken($this->getAccessToken())
             ->post(
                 '/git/pull',
                 [
-                    'server_id' => config('cloudways.server_id'),
-                    'app_id' => config('cloudways.app_id'),
-                    'git_url' => config('cloudways.git_url'),
-                    'branch_name' => config('cloudways.branch_name'),
-                    'deploy_path' => config('cloudways.deploy_path')
+                    'server_id' => $server,
+                    'app_id' => $app,
+                    'git_url' => $git,
+                    'branch_name' => $branch,
+                    'deploy_path' => $path
                 ]
             )
             ->throw()
             ->json()['operation_id'];
     }
 
-    /**
-     * @return array
-     */
-    private function attempt(): array
+    protected function getAccessToken(): string
     {
-        $data = [
-            'email' => config('cloudways.email'),
-            'api_key' => config('cloudways.api_key')
-        ];
+        $key = config('cloudways.cache_token_key');
 
-        return Http::cloudways()
-            ->post('/oauth/access_token', $data)
-            ->throw()
-            ->json();
+        if (Cache::has($key)) return Cache::get($key);
+
+        $token = $this->auth->getOAuthAccessToken();
+
+        return Cache::remember($key, $token->expires, $token->value);
     }
 }
