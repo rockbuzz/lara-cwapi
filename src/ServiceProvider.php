@@ -16,10 +16,10 @@ class ServiceProvider extends SupportServiceProvider
         ], 'config');
 
         $this->app->bind(
-            'cloudways', 
+            'cloudways',
             fn () => new Cloudways(
                 new Auth(config('cloudways.email'), config('cloudways.api_key'))
-            )   
+            )
         );
 
         Http::macro('cloudways', fn () => Http::baseUrl(config('cloudways.base_url')));

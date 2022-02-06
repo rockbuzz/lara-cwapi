@@ -37,9 +37,9 @@ class Auth
         return Token::fromArray(
             Http::cloudways()
                 ->post(
-                    '/oauth/access_token', 
+                    '/oauth/access_token',
                     [
-                        'email' => $this->email, 
+                        'email' => $this->email,
                         'api_key' => $this->apiKey
                     ]
                 )

@@ -28,8 +28,8 @@ class Token
     public static function fromArray(array $params): Token
     {
         return new static(
-            $params['access_token'], 
-            $params['token_type'], 
+            $params['access_token'],
+            $params['token_type'],
             $params['expires_in']
         );
     }

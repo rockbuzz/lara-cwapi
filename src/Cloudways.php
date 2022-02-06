@@ -28,13 +28,12 @@ class Cloudways
      * @throws RequestException
      */
     public function startGitPull(
-        int $server, 
-        int $app, 
-        string $git, 
-        string $branch, 
+        int $server,
+        int $app,
+        string $git,
+        string $branch,
         string $path = ''
-    ): int 
-    {
+    ): int {
         $token = $this->auth->getOAuthAccessToken();
 
         return Http::cloudways()
