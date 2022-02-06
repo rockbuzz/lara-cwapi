@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rockbuzz\LaraCloudways\Api;
+namespace Rockbuzz\LaraCwApi;
 
 use Illuminate\Http\Client\RequestException;
 

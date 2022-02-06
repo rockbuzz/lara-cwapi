@@ -2,11 +2,9 @@
 
 namespace Rockbuzz\LaraCwApi;
 
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider as SupportServiceProvider;
-use Rockbuzz\LaraCloudways\Api\Auth;
 
 class ServiceProvider extends SupportServiceProvider
 {

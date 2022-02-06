@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rockbuzz\LaraCwApi;
 
-use Rockbuzz\LaraCloudways\Api\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
