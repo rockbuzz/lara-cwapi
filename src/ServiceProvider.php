@@ -11,18 +11,27 @@ class ServiceProvider extends SupportServiceProvider
 
     public function boot(Filesystem $filesystem)
     {
-        $this->publishes([
-            __DIR__ . '/../config/cloudways.php' => config_path('cloudways.php')
-        ], 'config');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/cloudways.php' => config_path('cloudways.php')
+            ], 'config');
+        }
 
         $this->app->bind(
             'cloudways',
-            fn () => new Cloudways(
-                new Auth(config('cloudways.email'), config('cloudways.api_key'))
-            )
+            function () {
+                return new Cloudways(
+                    new Auth(config('cloudways.email'), config('cloudways.api_key'))
+                );
+            }
         );
 
-        Http::macro('cloudways', fn () => Http::baseUrl(config('cloudways.base_url')));
+        Http::macro(
+            'cloudways', 
+            function () {
+                return Http::baseUrl(config('cloudways.base_url'));
+            }
+        );
     }
 
     public function register()

@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.3-fpm-alpine
 
 RUN apk add --no-cache $PHPIZE_DEPS bash
 
