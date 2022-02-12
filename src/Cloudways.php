@@ -51,4 +51,29 @@ class Cloudways
             ->throw()
             ->json()['operation_id'];
     }
+
+    /**
+     * Take application backup
+     *
+     * @param integer $server
+     * @param integer $app
+     * @return integer Opreation ID
+     * @throws RequestException
+     */
+    public function appManageBackup(int $server, int $app): int
+    {
+        $token = $this->auth->getOAuthAccessToken();
+
+        return Http::cloudways()
+            ->withToken($token->value)
+            ->post(
+                '/app/manage/takeBackup',
+                [
+                    'server_id' => $server,
+                    'app_id' => $app
+                ]
+            )
+            ->throw()
+            ->json()['operation_id'];
+    }
 }

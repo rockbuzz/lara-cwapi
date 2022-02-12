@@ -27,7 +27,7 @@ class ServiceProvider extends SupportServiceProvider
         );
 
         Http::macro(
-            'cloudways', 
+            'cloudways',
             function () {
                 return Http::baseUrl(config('cloudways.base_url'));
             }

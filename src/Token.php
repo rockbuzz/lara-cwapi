@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Rockbuzz\LaraCwApi;
 
-use Illuminate\Http\Client\RequestException;
-
 class Token
 {
     /** @var string */
@@ -24,7 +22,6 @@ class Token
         $this->expires = $expires;
     }
 
-    /** @throws RequestException */
     public static function fromArray(array $params): Token
     {
         return new static(
