@@ -15,9 +15,38 @@ $ composer require rockbuzz/lara-cwapi
 ```
 
 ## Usage
-```php
-$ ...
+
+configuration in .env
+```env
+CLOUDWAYS_EMAIL=
+CLOUDWAYS_API_KEY=
 ```
+
+Pull repo changes and deploy them
+```php
+$ app('cloudways')->startGitPull(
+    int $server,
+    int $app,
+    string $git,
+    string $branch,
+    string $path = ''
+);
+```
+
+Take application backup
+```php
+$ app('cloudways')->appManageBackup(
+    int $server,
+    int $app
+);
+```
+
+---
+**NOTE**
+
+Sensitive values such as server and app id must be set in environment variables
+
+---
 
 ## Optional
 
