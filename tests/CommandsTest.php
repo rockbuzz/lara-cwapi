@@ -13,7 +13,6 @@ class CommandsTest extends TestCase
         Config::set('cloudways.server_id', 111);
         Config::set('cloudways.app_id', 222);
         Config::set('cloudways.git_url', 'git@test.git');
-        Config::set('cloudways.git_url', '');
     }
 
     /** @test */

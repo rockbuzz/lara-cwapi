@@ -18,7 +18,7 @@ class DeployCommand extends Command
                 config('cloudways.server_id'),
                 config('cloudways.app_id'),
                 config('cloudways.git_url'),
-                config('cloudways.branch_name'),
+                config('cloudways.git_branch_name'),
                 config('cloudways.deploy_path')
             );
             $this->info("Deploy successfully! Operation ID: $operation");
