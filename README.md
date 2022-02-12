@@ -15,8 +15,12 @@ $ composer require rockbuzz/lara-cwapi
 ```
 
 ## Usage
+---
+**NOTE**
+Sensitive values such as server and app id must be set in environment variables
 
-configuration in .env
+---
+
 ```env
 CLOUDWAYS_EMAIL=
 CLOUDWAYS_API_KEY=
@@ -32,6 +36,17 @@ $ app('cloudways')->startGitPull(
     string $path = ''
 );
 ```
+or
+```env
+CLOUDWAYS_SERVER_ID=
+CLOUDWAYS_APP_ID=
+CLOUDWAYS_GIT_URL=
+CLOUDWAYS_GIT_BRANCH_NAME=
+CLOUDWAYS_DEPLOY_PATH=
+```
+```bash
+$ php artisan cw:deploy
+```
 
 Take application backup
 ```php
@@ -40,13 +55,14 @@ $ app('cloudways')->appManageBackup(
     int $app
 );
 ```
-
----
-**NOTE**
-
-Sensitive values such as server and app id must be set in environment variables
-
----
+or
+```env
+CLOUDWAYS_SERVER_ID=
+CLOUDWAYS_APP_ID=
+```
+```bash
+$ php artisan cw:app-backup
+```
 
 ## Optional
 
