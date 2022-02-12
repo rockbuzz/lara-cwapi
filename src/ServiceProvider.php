@@ -5,6 +5,8 @@ namespace Rockbuzz\LaraCwApi;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider as SupportServiceProvider;
+use Rockbuzz\LaraCwApi\Commands\AppBackupCommand;
+use Rockbuzz\LaraCwApi\Commands\DeployCommand;
 
 class ServiceProvider extends SupportServiceProvider
 {
@@ -32,6 +34,11 @@ class ServiceProvider extends SupportServiceProvider
                 return Http::baseUrl(config('cloudways.base_url'));
             }
         );
+
+        $this->commands([
+            DeployCommand::class,
+            AppBackupCommand::class
+        ]);
     }
 
     public function register()

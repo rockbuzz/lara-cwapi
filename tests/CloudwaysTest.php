@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
 
 class CloudwaysTest extends TestCase
@@ -34,12 +33,5 @@ class CloudwaysTest extends TestCase
         $this->expectException(RequestException::class);
 
         $this->cloudways->appManageBackup(1000, 2000);
-    }
-
-    protected function httpFake(string $uri, string $responseBody = null, $statusCode = 500)
-    {
-        Http::fake([
-            config('cloudways.base_url') . $uri => Http::response($responseBody, $statusCode)
-        ]);
     }
 }

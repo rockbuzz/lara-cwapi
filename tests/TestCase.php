@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Support\Facades\Http;
 use Tests\Models\User;
 use Rockbuzz\LaraCwApi\ServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -39,19 +40,10 @@ class TestCase extends OrchestraTestCase
         return [ServiceProvider::class];
     }
 
-    protected function signIn($attributes = [], $user = null)
+    protected function httpFake(string $uri, string $responseBody = null, $statusCode = 500)
     {
-        $this->actingAs($user ?: $this->create(User::class, $attributes));
-        return $this;
-    }
-
-    protected function create(string $class, array $attributes = [], int $times = null)
-    {
-        return factory($class, $times)->create($attributes);
-    }
-
-    protected function make(string $class, array $attributes = [], int $times = null)
-    {
-        return factory($class, $times)->make($attributes);
+        Http::fake([
+            config('cloudways.base_url') . $uri => Http::response($responseBody, $statusCode)
+        ]);
     }
 }
