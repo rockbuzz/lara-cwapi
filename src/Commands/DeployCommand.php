@@ -14,7 +14,6 @@ class DeployCommand extends Command
 
     public function handle()
     {
-        $branch = config('cloudways.git_branch_name');
         $repo = config('cloudways.git_url');
 
         try {
@@ -22,7 +21,7 @@ class DeployCommand extends Command
                 config('cloudways.server_id'),
                 config('cloudways.app_id'),
                 $repo,
-                $this->argument('branch') ?? $branch,
+                $branch = $this->argument('branch') ?? config('cloudways.git_branch_name'),
                 config('cloudways.deploy_path')
             );
 
