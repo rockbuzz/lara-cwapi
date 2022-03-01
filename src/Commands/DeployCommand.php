@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class DeployCommand extends Command
 {
-    protected $signature = 'cw:deploy {--branch?}';
+    protected $signature = 'cw:deploy {--b|branch?}';
 
     protected $description = 'Deploy in app via git';
 
@@ -22,7 +22,7 @@ class DeployCommand extends Command
                 config('cloudways.server_id'),
                 config('cloudways.app_id'),
                 $repo,
-                $this->option('branch') ?? $branch,
+                $this->option('b') ?? $branch,
                 config('cloudways.deploy_path')
             );
 
