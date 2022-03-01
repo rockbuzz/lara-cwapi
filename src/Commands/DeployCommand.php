@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class DeployCommand extends Command
 {
-    protected $signature = 'cw:deploy {branch?}';
+    protected $signature = 'cw:deploy {--branch?}';
 
     protected $description = 'Deploy in app via git';
 
