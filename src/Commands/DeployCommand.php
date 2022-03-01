@@ -30,7 +30,9 @@ class DeployCommand extends Command
             $this->newLine();
             $this->table(
                 ['Operation ID', 'Repo', 'Branch'],
-                [$operation, $repo, $branch]
+                [
+                    [$operation, $repo, $branch]
+                ]
             );
 
             return 0;
