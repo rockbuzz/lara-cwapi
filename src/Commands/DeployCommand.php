@@ -7,9 +7,10 @@ use Illuminate\Console\Command;
 
 class DeployCommand extends Command
 {
-    protected $signature = 'cw:deploy {--b|branch?}';
+    protected $signature = 'cw:deploy {branch?}';
 
-    protected $description = 'Deploy in app via git';
+    protected $description = 'Deploy in app via git
+        {branch : The branch name of the repository.}';
 
     public function handle()
     {
@@ -17,12 +18,11 @@ class DeployCommand extends Command
         $repo = config('cloudways.git_url');
 
         try {
-
             $operation = app('cloudways')->startGitPull(
                 config('cloudways.server_id'),
                 config('cloudways.app_id'),
                 $repo,
-                $this->option('b') ?? $branch,
+                $this->option('branch') ?? $branch,
                 config('cloudways.deploy_path')
             );
 
