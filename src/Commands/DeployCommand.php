@@ -22,7 +22,7 @@ class DeployCommand extends Command
                 config('cloudways.server_id'),
                 config('cloudways.app_id'),
                 $repo,
-                $this->argument('branch') ?? $branch,
+                $this->option('branch') ?? $branch,
                 config('cloudways.deploy_path')
             );
 
