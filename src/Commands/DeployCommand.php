@@ -7,10 +7,9 @@ use Illuminate\Console\Command;
 
 class DeployCommand extends Command
 {
-    protected $signature = 'cw:deploy {branch?}';
+    protected $signature = 'cw:deploy {branch? : The branch name of the repository.}';
 
-    protected $description = 'Deploy in app via git
-        {branch : The branch name of the repository.}';
+    protected $description = 'Deploy in app via git';
 
     public function handle()
     {
@@ -26,13 +25,9 @@ class DeployCommand extends Command
             );
 
             $this->info("Deploy successfully!");
-            $this->newLine();
-            $this->table(
-                ['Operation ID', 'Repo', 'Branch'],
-                [
-                    [$operation, $repo, $branch]
-                ]
-            );
+            $this->line("Operation ID: $operation");
+            $this->line("Repository: $repo");
+            $this->line("Branch: $branch");
 
             return 0;
         } catch (Exception $e) {

@@ -40,10 +40,19 @@ class TestCase extends OrchestraTestCase
         return [ServiceProvider::class];
     }
 
+    protected function oauth()
+    {
+        $this->httpFake('/oauth/access_token', json_encode([
+            'access_token' => '7a834tPel8ZgrtlhkGSp2svlpegnUPKnx57Keits',
+            'token_type' => 'Bearer',
+            'expires_in' => 3600
+        ]), 200);
+    }
+
     protected function httpFake(string $uri, string $responseBody = null, $statusCode = 500)
     {
         Http::fake([
             config('cloudways.base_url') . $uri => Http::response($responseBody, $statusCode)
         ]);
-    }
+    }    
 }

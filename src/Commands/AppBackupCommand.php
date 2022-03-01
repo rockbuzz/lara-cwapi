@@ -18,7 +18,8 @@ class AppBackupCommand extends Command
                 config('cloudways.server_id'),
                 config('cloudways.app_id')
             );
-            $this->info("Backup successfully! Operation ID: $operation");
+            $this->info("App Backup successfully!");
+            $this->line("Operation ID: $operation");
 
             return 0;
         } catch (Exception $e) {
