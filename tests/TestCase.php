@@ -54,5 +54,5 @@ class TestCase extends OrchestraTestCase
         Http::fake([
             config('cloudways.base_url') . $uri => Http::response($responseBody, $statusCode)
         ]);
-    }    
+    }
 }
