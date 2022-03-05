@@ -33,7 +33,7 @@ class CommandsTest extends TestCase
 
         $this->httpFake('/git/pull', json_encode(['operation_id' => 123456]), 200);
 
-        $this->artisan('cw:deploy', ['branch' => 'main'])
+        $this->artisan('cw:deploy', ['branch' => 'main', 'app' => 123456])
             ->expectsOutput('Deploy successfully!')
             ->expectsOutput('Operation ID: 123456')
             ->expectsOutput('Repository: git@test.git')
