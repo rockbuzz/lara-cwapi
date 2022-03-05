@@ -30,7 +30,6 @@ class DeployCommand extends Command
             $this->line("Operation ID: $operation");
             $this->line("Repository: $repo");
             $this->line("Branch: $branch");
-            $this->line("AppID: $app");
 
             return 0;
         } catch (Exception $e) {
