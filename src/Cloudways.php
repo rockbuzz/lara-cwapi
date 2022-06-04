@@ -87,16 +87,15 @@ class Cloudways
      */
     public function appManageSync(
         int $sourceApp,
-        int $sourceServer, 
+        int $sourceServer,
         int $app,
         int $server,
         string $action = 'pull',
         bool $appFiles = false,
         bool $dbFiles = true,
         bool $backupTable = true,
-        bool $backup = true    
-    )
-    {
+        bool $backup = true
+    ) {
         $token = $this->auth->getOAuthAccessToken();
 
         return Http::cloudways()
@@ -105,11 +104,11 @@ class Cloudways
                 '/sync/app',
                 [
                     'source_server_id' => $sourceServer,
-                    'source_app_id' => $sourceApp,                    
+                    'source_app_id' => $sourceApp,
                     'action' => $action,
                     'appFiles' => $appFiles,
                     'dbFiles' => $dbFiles,
-                    'table' => $backupTable,                    
+                    'table' => $backupTable,
                     'app_id' => $app,
                     'server_id' => $server,
                     'backup' => $backup

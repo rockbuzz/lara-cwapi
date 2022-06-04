@@ -16,7 +16,7 @@ class AppSyncCommand extends Command
     public function handle()
     {
         try {
-            $operation = app('cloudways')->appManageSync(              
+            $operation = app('cloudways')->appManageSync(
                 $this->argument('source_app_id'),
                 $this->argument('source_server_id') ?? config('cloudways.server_id'),
                 config('cloudways.app_id'),
