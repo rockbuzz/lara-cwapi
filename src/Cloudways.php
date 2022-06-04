@@ -93,7 +93,8 @@ class Cloudways
         string $action = 'pull',
         bool $appFiles = false,
         bool $dbFiles = true,
-        bool $backupTable = true     
+        bool $backupTable = true,
+        bool $backup = true    
     )
     {
         $token = $this->auth->getOAuthAccessToken();
@@ -111,6 +112,7 @@ class Cloudways
                     'table' => $backupTable,
                     'source_server_id' => $server,
                     'source_app_id' => $app,
+                    'backup' => $backup
                 ]
             )
             ->throw()
