@@ -86,8 +86,8 @@ class Cloudways
      * @throws RequestException
      */
     public function appManageSync(
-        int $fromApp,
-        int $fromServer, 
+        int $sourceApp,
+        int $sourceServer, 
         int $app,
         int $server,
         string $action = 'pull',
@@ -104,14 +104,14 @@ class Cloudways
             ->post(
                 '/sync/app',
                 [
-                    'app_id' => $fromApp,
-                    'server_id' => $fromServer,
+                    'source_server_id' => $sourceServer,
+                    'source_app_id' => $sourceApp,                    
                     'action' => $action,
                     'appFiles' => $appFiles,
                     'dbFiles' => $dbFiles,
-                    'table' => $backupTable,
-                    'source_server_id' => $server,
-                    'source_app_id' => $app,
+                    'table' => $backupTable,                    
+                    'app_id' => $app,
+                    'server_id' => $server,
                     'backup' => $backup
                 ]
             )
