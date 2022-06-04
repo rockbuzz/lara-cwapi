@@ -72,7 +72,7 @@ class CommandsTest extends TestCase
 
         $this->httpFake('/sync/app', json_encode(['operation_id' => 123456]), 200);
 
-        $this->artisan('cw:app-sync', ['from_app_id' => 12345678])
+        $this->artisan('cw:app-sync', ['source_app_id' => 12345678])
             ->expectsOutput('App Sync successfully!')
             ->expectsOutput('Operation ID: 123456')
             ->assertExitCode(0);
