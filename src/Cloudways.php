@@ -90,7 +90,8 @@ class Cloudways
         int $fromServer, 
         int $app,
         int $server,
-        string $action = 'Pull',
+        string $action = 'pull',
+        bool $appFiles = false,
         bool $dbFiles = true,
         bool $backupTable = true     
     )
@@ -105,6 +106,7 @@ class Cloudways
                     'app_id' => $fromApp,
                     'server_id' => $fromServer,
                     'action' => $action,
+                    'appFiles' => $appFiles,
                     'dbFiles' => $dbFiles,
                     'table' => $backupTable,
                     'source_server_id' => $server,

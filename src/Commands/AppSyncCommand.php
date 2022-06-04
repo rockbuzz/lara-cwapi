@@ -20,7 +20,7 @@ class AppSyncCommand extends Command
                 $this->argument('from_app_id'),
                 $this->argument('from_server_id') ?? config('cloudways.server_id'),
                 config('cloudways.app_id'),
-                config('cloudways.server_id'),
+                config('cloudways.server_id')
             );
             $this->info("App Sync successfully!");
             $this->line("Operation ID: $operation");
