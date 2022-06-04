@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider as SupportServiceProvider;
 use Rockbuzz\LaraCwApi\Commands\AppBackupCommand;
+use Rockbuzz\LaraCwApi\Commands\AppSyncCommand;
 use Rockbuzz\LaraCwApi\Commands\DeployCommand;
 
 class ServiceProvider extends SupportServiceProvider
@@ -37,7 +38,8 @@ class ServiceProvider extends SupportServiceProvider
 
         $this->commands([
             DeployCommand::class,
-            AppBackupCommand::class
+            AppBackupCommand::class,
+            AppSyncCommand::class
         ]);
     }
 

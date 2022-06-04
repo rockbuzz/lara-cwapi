@@ -64,4 +64,17 @@ class CommandsTest extends TestCase
             ->expectsOutput('Operation ID: 123456')
             ->assertExitCode(0);
     }
+
+    /** @test */
+    public function sync_app_it_should_successfully()
+    {
+        $this->oauth();
+
+        $this->httpFake('/sync/app', json_encode(['operation_id' => 123456]), 200);
+
+        $this->artisan('cw:app-sync', ['from_app_id' => 12345678])
+            ->expectsOutput('App Sync successfully!')
+            ->expectsOutput('Operation ID: 123456')
+            ->assertExitCode(0);
+    }
 }

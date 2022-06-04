@@ -76,4 +76,42 @@ class Cloudways
             ->throw()
             ->json()['operation_id'];
     }
+
+    /**
+     * Take application backup
+     *
+     * @param integer $server
+     * @param integer $app
+     * @return integer Opreation ID
+     * @throws RequestException
+     */
+    public function appManageSync(
+        int $fromApp,
+        int $fromServer, 
+        int $app,
+        int $server,
+        string $action = 'Pull',
+        bool $dbFiles = true,
+        bool $backupTable = true     
+    )
+    {
+        $token = $this->auth->getOAuthAccessToken();
+
+        return Http::cloudways()
+            ->withToken($token->value)
+            ->post(
+                '/sync/app',
+                [
+                    'app_id' => $fromApp,
+                    'server_id' => $fromServer,
+                    'action' => $action,
+                    'dbFiles' => $dbFiles,
+                    'table' => $backupTable,
+                    'source_server_id' => $server,
+                    'source_app_id' => $app,
+                ]
+            )
+            ->throw()
+            ->json()['operation_id'];
+    }
 }
