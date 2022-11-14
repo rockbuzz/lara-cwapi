@@ -78,7 +78,7 @@ class Cloudways
     }
 
     /**
-     * Take application backup
+     * Take application sync
      *
      * @param integer $server
      * @param integer $app
