@@ -8,5 +8,14 @@ return [
     'app_id' => env('CLOUDWAYS_APP_ID'),
     'git_url' => env('CLOUDWAYS_GIT_URL'),
     'git_branch_name' => env('CLOUDWAYS_GIT_BRANCH_NAME', 'develop'),
-    'deploy_path' => env('CLOUDWAYS_DEPLOY_PATH', '')
+    'deploy_path' => env('CLOUDWAYS_DEPLOY_PATH', ''),
+    'sync' => [
+        'tableSelected' => stringEnvToArray(env('CLOUDWAYS_SYNC_TABLE_SELECTED', 'users'))
+    ]
 ];
+
+function stringEnvToArray(string $data): array {
+    return array_map(function ($item) {
+        return trim($item);
+    }, explode(',', $data));
+}

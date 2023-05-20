@@ -88,6 +88,7 @@ class Cloudways
     public function appManageSync(
         int $sourceApp,
         int $sourceServer,
+        array $tableSelected,
         int $app,
         int $server,
         string $action = 'pull',
@@ -111,7 +112,8 @@ class Cloudways
                     'table' => $backupTable,
                     'app_id' => $app,
                     'server_id' => $server,
-                    'backup' => $backup
+                    'backup' => $backup,
+                    'tableSelected' => $tableSelected
                 ]
             )
             ->throw()

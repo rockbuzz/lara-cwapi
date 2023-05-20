@@ -19,6 +19,7 @@ class AppSyncCommand extends Command
             $operation = app('cloudways')->appManageSync(
                 $this->argument('source_app_id'),
                 $this->argument('source_server_id') ?? config('cloudways.server_id'),
+                config('cloudways.sync.tableSelected'),
                 config('cloudways.app_id'),
                 config('cloudways.server_id')
             );
