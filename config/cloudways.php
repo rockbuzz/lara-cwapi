@@ -13,9 +13,3 @@ return [
         'tableSelected' => stringEnvToArray(env('CLOUDWAYS_SYNC_TABLE_SELECTED', 'users'))
     ]
 ];
-
-function stringEnvToArray(string $data): array {
-    return array_map(function ($item) {
-        return trim($item);
-    }, explode(',', $data));
-}
