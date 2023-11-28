@@ -20,8 +20,8 @@ class DeployCommand extends Command
 
         try {
             $operation = app('cloudways')->startGitPull(
-                $server = $this->argument('server') ?? config('cloudways.server_id'),
-                $app = $this->argument('app') ?? config('cloudways.app_id'),
+                $server = (int)$this->argument('server') ?? config('cloudways.server_id'),
+                $app = (int)$this->argument('app') ?? config('cloudways.app_id'),
                 $repo,
                 $branch = $this->argument('branch') ?? config('cloudways.git_branch_name'),
                 config('cloudways.deploy_path')
